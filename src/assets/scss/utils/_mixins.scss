@@ -1,0 +1,14 @@
+$container-width-m: 760px;
+$container-width-s: 540px;
+
+@mixin m-device {
+  @media (max-width: $container-width-m) {
+    @content;
+  }
+}
+
+@mixin s-device {
+  @media (max-width: $container-width-s) {
+    @content;
+  }
+}
