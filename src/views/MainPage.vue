@@ -5,6 +5,7 @@
       <h2 class="filters-title">Фильтр</h2>
       <div class="filters-inputs">
         <MySelect 
+          :filterValue="filterValue"
           :options="options"
           @setEmptyFilterValue="setEmptyFilterValue"
         />
@@ -75,6 +76,7 @@ import { tableHeads } from '@/helpers/constants/tableHeads';
 
 export default {
   name: 'MainPage',
+
   components: {
     MySelect,
     MyInput,
@@ -143,17 +145,18 @@ export default {
           filterValueInput: this.filterValueInput 
         }})
       } else {
-        this.setEmptyFilterValue();
+        this.setEmptyFilterValue('');
       }
     },
 
-    setEmptyFilterValue() {
+    setEmptyFilterValue(val) {
       const query = Object.assign({}, this.$route.query);
       delete query.filter;
       delete query.filterValueInput;
       delete query.filterValueStart;
       delete query.filterValueEnd;
       this.$router.replace({ query: query });
+      this.setFilterValue(val);
       this.setFilterValueInput('');
       this.setFilterValueStart(0);
       this.setFilterValueEnd(1);
@@ -172,12 +175,12 @@ export default {
 
     setValueStart(val) {
       this.setFilterValueStart(val);
-      this.setQueryStartEnd()
+      this.setQueryStartEnd();
     },
 
     setValueEnd(val) {
       this.setFilterValueEnd(val);
-      this.setQueryStartEnd()
+      this.setQueryStartEnd();
     },
 
     setQueryStartEnd() {
@@ -210,7 +213,7 @@ export default {
   },
 
   mounted() {
-    this.applyFiltersAndSort()
+    this.applyFiltersAndSort();
   }
 }
 </script>

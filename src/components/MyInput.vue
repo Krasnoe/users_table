@@ -1,5 +1,8 @@
 <template>
-  <label for="text-input" class="filters-inputs-label">
+  <label 
+    for="text-input" 
+    class="filters-inputs-label"
+  >
     Введите {{ filterValue === 'login' ? 'логин' : 'статус' }}
   </label>
   <input

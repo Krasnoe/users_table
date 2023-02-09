@@ -1,6 +1,6 @@
 <template>
   <select 
-      v-model="filterValue"
+      :value="filterValue"
       @change="setEmptyFilterValue"
       class="select"
     >
@@ -25,26 +25,19 @@
 <script>
 export default {
   props: {
+    filterValue: {
+      type: String,
+      default: ''
+    },
     options: {
       type: Array,
       default: () => []
     }
   },
 
-  computed: {
-    filterValue: {
-      get() {
-        return this.$store.state.filterValue
-      },
-      set(value) {
-        this.$store.commit('setFilterValue', value)
-      }
-    }
-  },
-
   methods: {
-    setEmptyFilterValue() {
-      this.$emit('setEmptyFilterValue');
+    setEmptyFilterValue(e) {
+      this.$emit('setEmptyFilterValue', e.target.value);
     }
   }
 }
